@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("Configuraci�n de Soltar (Drop)")]
     public Transform dropPoint;
     public InventoryItemData currentItem;
+    private int selectedIndex = -1; // -1 significa sin selección
 
     private void Awake()
     {
@@ -78,11 +79,50 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        // Deseleccionar el anterior si había
+        if (selectedIndex >= 0 && selectedIndex < InventorySystem.Instance.Inventory.Count)
+        {
+            HighlightInventoryItem(selectedIndex, false);
+        }
+
         // Obtener el item del inventario por índice
+        selectedIndex = index;
         InventoryItem selectedItem = InventorySystem.Instance.Inventory[index];
         currentItem = selectedItem.data;
         
+        // Resaltar el item seleccionado
+        HighlightInventoryItem(index, true);
+        
         Debug.Log($"Item seleccionado: {currentItem.itemName} (Posición {index + 1})");
+    }
+
+    void HighlightInventoryItem(int index, bool highlight)
+    {
+        InventoryUI inventoryUI = FindObjectOfType<InventoryUI>();
+        if (inventoryUI == null) return;
+
+        // Obtener el transform del contenedor de items
+        Transform inventoryContainer = inventoryUI.transform.Find("InventoryContainer");
+        if (inventoryContainer == null)
+        {
+            inventoryContainer = inventoryUI.transform;
+        }
+
+        // Contar solo los ItemSlot (no otros componentes)
+        int slotCount = 0;
+        foreach (Transform child in inventoryContainer)
+        {
+            ItemSlot slot = child.GetComponent<ItemSlot>();
+            if (slot != null)
+            {
+                if (slotCount == index)
+                {
+                    slot.SetDarkened(!highlight);
+                    return;
+                }
+                slotCount++;
+            }
+        }
     }
 
     void DropItem()
