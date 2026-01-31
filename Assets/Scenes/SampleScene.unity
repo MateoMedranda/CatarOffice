@@ -1225,6 +1225,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
   itemSlotPrefab: {fileID: 1237630025582642674, guid: f0eb23a2d4e09854a87f03d1e7cdeace, type: 3}
+  itemSize: {x: 500, y: 100}
+  spacing: 20
 --- !u!114 &1389315086
 MonoBehaviour:
   m_ObjectHideFlags: 0
