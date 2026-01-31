@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.constraints |= RigidbodyConstraints.FreezePositionY;
+        }
     }
 
     void Update()
