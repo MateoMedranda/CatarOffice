@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private InteractionPrompt currentPrompt;
+
     void Update()
     {
         Vector2 inputVector = playerControls.Player.Move.ReadValue<Vector2>();
@@ -58,6 +60,42 @@ public class PlayerController : MonoBehaviour
         {
             playerSprite.flipX = false;
         }
+
+        CheckForInteractionPrompts();
+    }
+
+    private void CheckForInteractionPrompts()
+    {
+        Collider[] cercanos = Physics.OverlapSphere(transform.position, radioInteraccion);
+        InteractionPrompt closestPrompt = null;
+        float closestDistance = float.MaxValue;
+
+        foreach (var col in cercanos)
+        {
+            // Check if it's interactable AND has a prompt
+            if (col.GetComponent<IInteractable>() != null)
+            {
+                if (col.TryGetComponent(out InteractionPrompt prompt))
+                {
+                    float d = Vector3.Distance(transform.position, col.transform.position);
+                    if (d < closestDistance)
+                    {
+                        closestDistance = d;
+                        closestPrompt = prompt;
+                    }
+                }
+            }
+        }
+
+        // State machine for prompts
+        if (closestPrompt != currentPrompt)
+        {
+            if (currentPrompt != null) currentPrompt.Hide();
+            
+            currentPrompt = closestPrompt;
+            
+            if (currentPrompt != null) currentPrompt.Show();
+        }
     }
 
     private void FixedUpdate()
@@ -73,9 +111,9 @@ public class PlayerController : MonoBehaviour
         
         foreach (var col in cercanos)
         {
-            if (col.TryGetComponent(out Generic_NPC npc))
+            if (col.TryGetComponent(out IInteractable interactable))
             {
-                npc.Interactuar();
+                interactable.Interactuar();
                 break; 
             }
         }

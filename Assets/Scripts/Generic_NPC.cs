@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Generic_NPC : MonoBehaviour {
+public class Generic_NPC : MonoBehaviour, IInteractable {
     public DialogueData datos; 
     public string npcName = "NPC"; 
     public Color npcNameColor = Color.blue; // Default blue
