@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 movement;
     private PlayerControls playerControls;
-    [Header("Configuración de Soltar (Drop)")]
+    [Header("Configuraciï¿½n de Soltar (Drop)")]
     public Transform dropPoint;
     public InventoryItemData currentItem;
 
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        currentItem = null; // Comenzamos sin item en la mano
     }
 
     void Update()
@@ -35,6 +36,21 @@ public class PlayerController : MonoBehaviour
         Debug.Log(x + "," + z);
 
         movement = new Vector3(x, 0, z).normalized;
+        
+        // --- SELECCIONAR ITEM CON 1, 2, 3 ---
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectInventoryItem(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectInventoryItem(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectInventoryItem(2);
+        }
+        
         // --- SOLTAR ---
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -48,30 +64,51 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(transform.position + movement * speed * Time.fixedDeltaTime);
     }
 
+    void SelectInventoryItem(int index)
+    {
+        if (InventorySystem.Instance == null || InventorySystem.Instance.Inventory.Count == 0)
+        {
+            Debug.Log("ERROR: El inventario estÃ¡ vacÃ­o.");
+            return;
+        }
+
+        if (index >= InventorySystem.Instance.Inventory.Count)
+        {
+            Debug.Log($"ERROR: No hay item en posiciÃ³n {index + 1}. Solo tienes {InventorySystem.Instance.Inventory.Count} item(s).");
+            return;
+        }
+
+        // Obtener el item del inventario por Ã­ndice
+        InventoryItem selectedItem = InventorySystem.Instance.Inventory[index];
+        currentItem = selectedItem.data;
+        
+        Debug.Log($"Item seleccionado: {currentItem.itemName} (PosiciÃ³n {index + 1})");
+    }
+
     void DropItem()
     {
-        // Chequeo 1: ¿Tienes un punto de salida?
+        // Chequeo 1: ï¿½Tienes un punto de salida?
         if (dropPoint == null)
         {
-            Debug.Log("ERROR: ¡El 'Drop Point' se ha borrado o no está asignado!");
+            Debug.Log("ERROR: ï¿½El 'Drop Point' se ha borrado o no estï¿½ asignado!");
             return;
         }
 
-        // Chequeo 2: ¿Tienes algo en la mano?
+        // Chequeo 2: ï¿½Tienes algo en la mano?
         if (currentItem == null)
         {
-            Debug.Log("ERROR: Tu mano está vacía (Current Item es 'None'). Arrastra un ítem al Player para probar.");
+            Debug.Log("ERROR: Tu mano estï¿½ vacï¿½a (Current Item es 'None'). Arrastra un ï¿½tem al Player para probar.");
             return;
         }
 
-        // Chequeo 3: ¿El ítem sabe qué forma tiene?
+        // Chequeo 3: ï¿½El ï¿½tem sabe quï¿½ forma tiene?
         if (currentItem.itemPrefab == null)
         {
-            Debug.Log("ERROR: El ítem '" + currentItem.name + "' no tiene un Prefab asignado en su archivo.");
+            Debug.Log("ERROR: El ï¿½tem '" + currentItem.name + "' no tiene un Prefab asignado en su archivo.");
             return;
         }
 
-        // --- SI LLEGAMOS AQUÍ, TODO ESTÁ BIEN ---
+        // --- SI LLEGAMOS AQUï¿½, TODO ESTï¿½ BIEN ---
         Debug.Log("Todo correcto. Creando objeto...");
 
         Instantiate(currentItem.itemPrefab, dropPoint.position, dropPoint.rotation);
@@ -84,10 +121,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ERROR CRÍTICO: No se encuentra el 'InventorySystem' en la escena.");
+            Debug.LogError("ERROR CRï¿½TICO: No se encuentra el 'InventorySystem' en la escena.");
         }
 
         currentItem = null; // Vaciamos la mano
-        Debug.Log("¡ÉXITO! Objeto soltado y borrado.");
+        Debug.Log("ï¿½ï¿½XITO! Objeto soltado y borrado.");
     }
 }
