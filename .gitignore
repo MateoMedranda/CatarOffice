@@ -24,3 +24,12 @@ Thumbs.db
 *.booproj
 *.svd
 *.pdb
+UserSettings/Search.settings
+Assets/InputSettings/PlayerControls.cs
+ProjectSettings/ProjectVersion.txt
+UserSettings/EditorUserSettings.asset
+/UserSettings
+UserSettings/Layouts/default-6000.dwlt
+UserSettings/PlayModeUserSettings.asset
+UserSettings/Search.index
+UserSettings/Search.settings
