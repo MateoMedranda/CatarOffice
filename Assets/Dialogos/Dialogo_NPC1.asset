@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9bf78e432edd1e418899c4e22838c64, type: 3}
   m_Name: Dialogo_NPC1
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  frases: []
+  frases:
+  - 'Hola me llamo Fred
+
+'
