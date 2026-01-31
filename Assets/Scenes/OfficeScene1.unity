@@ -711,8 +711,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EmotionControl
   materialParedes: {fileID: 2100000, guid: 21e97f3f8f7e5c248922eda05a5cb6ef, type: 2}
   camaraJuego: {fileID: 512827025}
-  coloresPared: []
-  coloresFondo: []
+  coloresPared:
+  - {r: 0.69411767, g: 0.69803923, b: 0.69411767, a: 0}
+  - {r: 0.98204505, g: 1, b: 0.4433962, a: 0}
+  - {r: 1, g: 0.4537705, b: 0.4431373, a: 0}
+  coloresFondo:
+  - {r: 0.20392159, g: 0.21568629, b: 0.23137257, a: 0}
+  - {r: 0.3733992, g: 0.381132, b: 0.06543964, a: 0}
+  - {r: 0.38039216, g: 0.06666667, b: 0.070980124, a: 0}
 --- !u!4 &1665747172
 Transform:
   m_ObjectHideFlags: 0

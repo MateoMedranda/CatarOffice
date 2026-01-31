@@ -41,12 +41,20 @@ providers = {
 		priority = 90
 		defaultAction = null
 	}
+<<<<<<< HEAD
 	profilermarkers = {
+=======
+	performance = {
+>>>>>>> origin/Dev
 		active = false
 		priority = 100
 		defaultAction = null
 	}
+<<<<<<< HEAD
 	performance = {
+=======
+	profilermarkers = {
+>>>>>>> origin/Dev
 		active = false
 		priority = 100
 		defaultAction = null
