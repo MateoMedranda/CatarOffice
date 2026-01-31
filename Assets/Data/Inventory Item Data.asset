@@ -16,4 +16,4 @@ MonoBehaviour:
   id: InventoryItem
   itemName: Dulce
   itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 4130908607195211732, guid: 8de72ddb695fefa4481d2f7609857d14, type: 3}

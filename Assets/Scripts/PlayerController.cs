@@ -53,21 +53,21 @@ public class PlayerController : MonoBehaviour
         // Chequeo 1: ¿Tienes un punto de salida?
         if (dropPoint == null)
         {
-            Debug.LogError("ERROR: ¡El 'Drop Point' se ha borrado o no está asignado!");
+            Debug.Log("ERROR: ¡El 'Drop Point' se ha borrado o no está asignado!");
             return;
         }
 
         // Chequeo 2: ¿Tienes algo en la mano?
         if (currentItem == null)
         {
-            Debug.LogError("ERROR: Tu mano está vacía (Current Item es 'None'). Arrastra un ítem al Player para probar.");
+            Debug.Log("ERROR: Tu mano está vacía (Current Item es 'None'). Arrastra un ítem al Player para probar.");
             return;
         }
 
         // Chequeo 3: ¿El ítem sabe qué forma tiene?
         if (currentItem.itemPrefab == null)
         {
-            Debug.LogError("ERROR: El ítem '" + currentItem.name + "' no tiene un Prefab asignado en su archivo.");
+            Debug.Log("ERROR: El ítem '" + currentItem.name + "' no tiene un Prefab asignado en su archivo.");
             return;
         }
 

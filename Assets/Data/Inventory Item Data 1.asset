@@ -16,4 +16,4 @@ MonoBehaviour:
   id: InventoryItem
   itemName: Papas
   itemIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 825559364478115400, guid: a7eaa48558faa5c4a989fc832c1b23b5, type: 3}
