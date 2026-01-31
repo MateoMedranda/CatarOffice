@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c373c4da84be69647a432d18c12f5f62
+guid: 13379f05ab4b9cc49bcb7543340a4f11
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jhon2_Idle_0
+      name: principalIdleV2_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 128
-        height: 128
+        y: 8
+        width: 32
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,20 +125,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eef1bd7e87f5ff54faf1a6e8ac7a8db1
-      internalID: -1603923537
+      spriteID: 4f71ccb9c6dcdad4a82ddca8fe5fd0a8
+      internalID: 900553109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jhon2_Idle_1
+      name: principalIdleV2_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
+        x: 32
+        y: 8
+        width: 32
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5690e501765400740873be47fe92b147
-      internalID: 902018521
+      spriteID: 49af29143546bef4e9c787ffbcc3ef9a
+      internalID: 646893370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jhon2_Idle_2
+      name: principalIdleV2_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
+        x: 64
+        y: 8
+        width: 32
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,8 +169,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e07fc83eb53d8745a5fb5255ac02b97
-      internalID: -849113032
+      spriteID: 6904da85f0ee6834cbbb06e75e405986
+      internalID: -2104794232
       vertices: []
       indices: 
       edges: []
@@ -179,7 +179,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1d72099d9bee79d498875ceb97edc7bc
+    spriteID: a9b6ed55169614542a8e2bd0f19d89dc
     internalID: 0
     vertices: []
     indices: 
@@ -189,11 +189,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":128.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":1,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Jhon2_Idle_0: -1603923537
-      Jhon2_Idle_1: 902018521
-      Jhon2_Idle_2: -849113032
+      principalIdleV2_0: 900553109
+      principalIdleV2_1: 646893370
+      principalIdleV2_2: -2104794232
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
