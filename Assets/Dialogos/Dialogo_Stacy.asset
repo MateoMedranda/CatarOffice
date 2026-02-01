@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9bf78e432edd1e418899c4e22838c64, type: 3}
-  m_Name: Dialogo_Sam2
+  m_Name: Dialogo_Stacy
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   frases:
-  - "Necesitas algo m\xE1s?"
+  - Hola!
+  - Que tal?
