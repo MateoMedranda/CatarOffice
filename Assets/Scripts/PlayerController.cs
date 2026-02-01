@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     public InventoryItemData currentItem;
     private int selectedIndex = -1; // -1 significa sin selección
 
+    private float stepTimer = 0f;
+    [SerializeField] private float tiempoEntrePasos = 0.5f;
+
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -56,6 +59,21 @@ public class PlayerController : MonoBehaviour
         movement = new Vector3(inputVector.x, 0, inputVector.y).normalized;
 
         anim.SetBool(IS_WALK_PARAM, movement != Vector3.zero);
+
+        // --- LÓGICA DE SONIDO DE PASOS ---
+        if (movement != Vector3.zero)
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0)
+            {
+                AudioManager.Instance.PlaySFX("Walk");
+                stepTimer = tiempoEntrePasos;
+            }
+        }
+        else
+        {
+            stepTimer = 0; // Reiniciar para que suene inmediato al volver a caminar
+        }
 
         if (inputVector.x != 0 && inputVector.x < 0)
         {
@@ -117,7 +135,7 @@ public class PlayerController : MonoBehaviour
         }
         
         // --- SOLTAR ---
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("--- INICIANDO DROP ---");
             DropItem();
@@ -156,6 +174,8 @@ public class PlayerController : MonoBehaviour
         
         // Resaltar el item seleccionado
         HighlightInventoryItem(index, true);
+
+        AudioManager.Instance.PlaySFX("Change");
         
         Debug.Log($"Item seleccionado: {currentItem.itemName} (Posición {index + 1})");
     }
@@ -215,7 +235,11 @@ public class PlayerController : MonoBehaviour
         // --- SI LLEGAMOS AQU�, TODO EST� BIEN ---
         Debug.Log("Todo correcto. Creando objeto...");
 
-        Instantiate(currentItem.itemPrefab, dropPoint.position, dropPoint.rotation);
+        Vector3 dropPosition = dropPoint.position;
+        dropPosition.y -= 0.75f; // Bajar el objeto 0.5 unidades m�s en el suelo
+        Instantiate(currentItem.itemPrefab, dropPosition, dropPoint.rotation);
+
+        AudioManager.Instance.PlaySFX("Drop");
 
         // BORRAR DEL INVENTARIO
         if (InventorySystem.Instance != null)

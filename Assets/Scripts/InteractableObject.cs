@@ -3,24 +3,31 @@ using UnityEngine.Events;
 
 public class InteractableObject : MonoBehaviour, IInteractable
 {
-    [Tooltip("Object that must be inactive/removed before this can be interacted with.")]
+    [Header("Bloqueo")]
+    [Tooltip("El objeto que debe desaparecer para poder usar esto (ej: La Escoba).")]
     public GameObject blockingObject;
 
-    [Tooltip("If true, this object disables itself after interaction (e.g., a broom being picked up).")]
+    [Tooltip("Si es true, este objeto se apaga al interactuar.")]
     public bool disableAfterInteraction;
 
+    [Header("Conexiones")]
+    // Esta es la lista que ve vacía en el inspector. Aquí conectaremos la puerta.
     public UnityEvent onInteract;
 
     public void Interactuar()
     {
-        // Check if blocked
+        // 1. CHEQUEO DE BLOQUEO (La Escoba)
         if (blockingObject != null && blockingObject.activeSelf)
         {
             Debug.Log("Interacción bloqueada por: " + blockingObject.name);
-            return;
+            
+            // AGREGADO: Sonido de Error/Xray
+            AudioManager.Instance.PlaySFX("Error"); 
+            
+            return; // Cortamos aquí, no dejamos pasar.
         }
 
-        // Perform interaction
+        // 2. ÉXITO (Aquí se llama a lo que pongamos en la lista)
         onInteract.Invoke();
 
         if (disableAfterInteraction)
