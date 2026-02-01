@@ -10,6 +10,10 @@ public class InteractableObject : MonoBehaviour, IInteractable
     [Tooltip("Si es true, este objeto se apaga al interactuar.")]
     public bool disableAfterInteraction;
 
+    [Header("Collider Específico (Opcional)")]
+    [Tooltip("Asigna aquí el collider del modelo 3D hijo si quieres que sea ese el que dispare la interacción.")]
+    public Collider interactionCollider;
+
     [Header("Conexiones")]
     // Esta es la lista que ve vacía en el inspector. Aquí conectaremos la puerta.
     public UnityEvent onInteract;
