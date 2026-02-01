@@ -6,6 +6,10 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI textoPantalla;
     public GameObject panelDialogo;
+
+    // --- AGREGADO: Variable para el Inventario ---
+    public GameObject inventoryUI; 
+    // --------------------------------------------
     
     private bool isDialogueActive = false;
     public bool IsDialogueActive => isDialogueActive;
@@ -34,6 +38,11 @@ public class DialogueManager : MonoBehaviour
         
         panelDialogo.SetActive(true);
         isDialogueActive = true;
+
+        // --- AGREGADO: Apagar inventario al abrir ---
+        if (inventoryUI != null) inventoryUI.SetActive(false);
+        // --------------------------------------------
+
         currentNPCName = nombreNPC;
         
         currentNameColorHex = "#" + ColorUtility.ToHtmlStringRGB(colorNombre);
@@ -61,6 +70,10 @@ public class DialogueManager : MonoBehaviour
         animationCoroutine = StartCoroutine(AnimateScale(Vector3.one, Vector3.zero, 0.3f, () => 
         {
             panelDialogo.SetActive(false);
+            
+            // --- AGREGADO: Prender inventario al cerrar ---
+            if (inventoryUI != null) inventoryUI.SetActive(true);
+            // ----------------------------------------------
         }));
     }
 

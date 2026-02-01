@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25633d92c0d22294ab07069e7ac75052, type: 3}
   m_Name: TarjetaArchivero
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemData
-  maxStackSize: 1
+  maxStackSize: 3
   id: TarArch
   itemName: TarArch
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 2049111439, guid: cc371796f7596f94cad95f2bde9a5a9a, type: 3}
   itemPrefab: {fileID: 3012201147899981551, guid: f6f6b532bd033c547bd9fa75a85e837d, type: 3}
