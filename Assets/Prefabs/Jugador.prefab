@@ -330,6 +330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySystem
       objectReference: {fileID: 0}
+    - target: {fileID: 7946850887383671814, guid: 9795f164e4e763e49928b6ab397f2a58, type: 3}
+      propertyPath: maxDistinctItems
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
