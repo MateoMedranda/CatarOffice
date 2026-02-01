@@ -215,7 +215,9 @@ public class PlayerController : MonoBehaviour
         // --- SI LLEGAMOS AQU�, TODO EST� BIEN ---
         Debug.Log("Todo correcto. Creando objeto...");
 
-        Instantiate(currentItem.itemPrefab, dropPoint.position, dropPoint.rotation);
+        Vector3 dropPosition = dropPoint.position;
+        dropPosition.y -= 0.75f; // Bajar el objeto 0.5 unidades m�s en el suelo
+        Instantiate(currentItem.itemPrefab, dropPosition, dropPoint.rotation);
 
         // BORRAR DEL INVENTARIO
         if (InventorySystem.Instance != null)
