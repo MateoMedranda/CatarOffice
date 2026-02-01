@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 2841559426665531126}
   - component: {fileID: 5034290743516083213}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Guardar UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
