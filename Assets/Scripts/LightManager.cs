@@ -25,6 +25,12 @@ public class LightManager : MonoBehaviour
     [Tooltip("Duración de la transición de luz (en segundos).")]
     public float transitionDuration = 2.0f;
 
+    [Header("Visuales del Interruptor")]
+    [Tooltip("El SpriteRenderer del objeto interruptor (opcional).")]
+    public SpriteRenderer switchRenderer;
+    [Tooltip("El sprite que se pondrá cuando la luz esté ENCENDIDA.")]
+    public Sprite onSprite;
+
     private bool isLightsOn = false;
     private float targetIntensity;
     private float initialIntensity;
@@ -77,6 +83,12 @@ public class LightManager : MonoBehaviour
         // Opcional: Apagar la luz del jugador cuando se enciende la luz principal
         // if (playerLight != null) playerLight.gameObject.SetActive(false);
         
+        // Cambiar el sprite del interruptor si está asignado
+        if (switchRenderer != null && onSprite != null)
+        {
+            switchRenderer.sprite = onSprite;
+        }
+
         AudioManager.Instance.PlaySFX("Switch"); // Asumiendo que existe un sonido "Switch" o genérico
     }
 }
