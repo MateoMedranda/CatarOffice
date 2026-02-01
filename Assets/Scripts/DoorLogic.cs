@@ -9,7 +9,7 @@ public class DoorLogic : MonoBehaviour
     public string sfxPuerta;
 
     [Header("Configuración Visual")]
-    [Tooltip("Arrastre aquí el objeto del Canvas que tiene el Animator (el Panel Negro).")]
+    [Tooltip("Arrasque aquí el objeto del Canvas que tiene el Animator (el Panel Negro).")]
     public Animator transitionAnimator; 
 
     [Header("Tiempos")]

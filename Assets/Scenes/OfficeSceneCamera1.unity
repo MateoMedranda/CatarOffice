@@ -789,7 +789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
   blockingObject: {fileID: 0}
-  disableAfterInteraction: 1
+  requiredItem: {fileID: 0}
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -1205,15 +1205,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389474040057732019, guid: 81d772c0c05f0cd4588facfda2591088, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.06
+      value: 1.72
       objectReference: {fileID: 0}
     - target: {fileID: 6389474040057732019, guid: 81d772c0c05f0cd4588facfda2591088, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.71
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6389474040057732019, guid: 81d772c0c05f0cd4588facfda2591088, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.73
+      value: 8.46
       objectReference: {fileID: 0}
     - target: {fileID: 6389474040057732019, guid: 81d772c0c05f0cd4588facfda2591088, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1409,23 +1409,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a469bd44f0749d64e8c57c6e3d6cac69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
-  blockingObject: {fileID: 986289498}
-  disableAfterInteraction: 0
+  blockingObject: {fileID: 0}
+  requiredItem: {fileID: 0}
   onInteract:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!65 &1775605833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1942,7 +1930,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1673413527562206334, guid: f6f6b532bd033c547bd9fa75a85e837d, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2487865306151285845, guid: f6f6b532bd033c547bd9fa75a85e837d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2074,6 +2062,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: consumeItem
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: requiredItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 64d93e1c9168c7c4fbd0c779727929ae, type: 2}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: disableAfterInteraction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 719431528389139194}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AbrirPuerta
+      objectReference: {fileID: 0}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoorLogic, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 354149383585298592, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511689237277055084, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3774076749120284452, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4946969349835859487, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.13484
@@ -2118,11 +2154,56 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorInteractObject
       objectReference: {fileID: 0}
+    - target: {fileID: 8900773168168309783, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920973562035090992, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: requiredItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 64d93e1c9168c7c4fbd0c779727929ae, type: 2}
+    - target: {fileID: 8920973562035090992, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: disableAfterInteraction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920973562035090992, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920973562035090992, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      propertyPath: onInteract.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7181403125611433401, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 719431528389139194}
   m_SourcePrefab: {fileID: 100100000, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+--- !u!1 &719431528389139193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7181403125611433401, guid: a75d80bbc63e0c949aa91a58a01ae1a0, type: 3}
+  m_PrefabInstance: {fileID: 719431528389139192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &719431528389139194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719431528389139193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3b066f689fb8c4a8bcbd16f431d412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorLogic
+  escenaDestino: OfficeStage2
+  sfxPuerta: TargetDoor
+  transitionAnimator: {fileID: 0}
+  esperaSonido: 1
+  duracionTransicion: 2
 --- !u!1001 &6146395085195210372
 PrefabInstance:
   m_ObjectHideFlags: 0
