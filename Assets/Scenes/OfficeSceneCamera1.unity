@@ -1984,6 +1984,8 @@ MonoBehaviour:
   radioInteraccion: 2
   anim: {fileID: 483616021}
   playerSprite: {fileID: 483616019}
+  dropPoint: {fileID: 0}
+  currentItem: {fileID: 0}
 --- !u!4 &2016593579
 Transform:
   m_ObjectHideFlags: 0
@@ -2060,6 +2062,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2099166377787486473, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1013594960, guid: 0d6c5b58f6f0f7642bc20d213f4c931d, type: 3}
     - target: {fileID: 3059610337385754704, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 157
@@ -2083,6 +2089,18 @@ PrefabInstance:
     - target: {fileID: 7501891490450185753, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501891490450185753, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501891490450185753, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501891490450185753, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.23
       objectReference: {fileID: 0}
     - target: {fileID: 7686074182893535632, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: m_Name
