@@ -96,10 +96,33 @@ public class PlayerController : MonoBehaviour
 
         foreach (var col in cercanos)
         {
-            // Check if it's interactable AND has a prompt
-            if (col.GetComponent<IInteractable>() != null)
+            // 1. Buscamos IInteractable en el objeto O en sus padres
+            IInteractable interactable = col.GetComponent<IInteractable>();
+            if (interactable == null)
             {
-                if (col.TryGetComponent(out InteractionPrompt prompt))
+                interactable = col.GetComponentInParent<IInteractable>();
+            }
+
+            if (interactable != null)
+            {
+                // 2. Si es un InteractableObject (nuestra clase concreta), revisamos si pide un collider específico
+                if (interactable is InteractableObject objScript)
+                {
+                    if (objScript.interactionCollider != null && objScript.interactionCollider != col)
+                    {
+                        // Si tiene un collider asignado y NO es el que tocamos, ignoramos.
+                        continue;
+                    }
+                }
+
+                // 3. Buscamos el Prompt (puede estar en el hijo o en el padre junto al script)
+                InteractionPrompt prompt = col.GetComponent<InteractionPrompt>();
+                if (prompt == null)
+                {
+                    prompt = col.GetComponentInParent<InteractionPrompt>();
+                }
+
+                if (prompt != null)
                 {
                     float d = Vector3.Distance(transform.position, col.transform.position);
                     if (d < closestDistance)
@@ -264,10 +287,26 @@ public class PlayerController : MonoBehaviour
         
         foreach (var col in cercanos)
         {
-            if (col.TryGetComponent(out IInteractable interactable))
+            // Misma lógica: buscar en objeto o padre
+            IInteractable interactable = col.GetComponent<IInteractable>();
+            if (interactable == null)
             {
+                interactable = col.GetComponentInParent<IInteractable>();
+            }
+
+            if (interactable != null)
+            {
+                // Validación de collider específico
+                if (interactable is InteractableObject objScript)
+                {
+                    if (objScript.interactionCollider != null && objScript.interactionCollider != col)
+                    {
+                        continue;
+                    }
+                }
+
                 interactable.Interactuar();
-                break; 
+                break;
             }
         }
     }
