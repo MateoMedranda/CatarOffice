@@ -53,6 +53,7 @@ public class ItemObject : MonoBehaviour
         {
             // Bloqueo f�sico si no hay espacio en inventario
             GetComponent<Collider>().isTrigger = false;
+            AudioManager.Instance.PlaySFX("Error");
             Debug.Log("Inventario lleno, el objeto se vuelve s�lido.");
         }
     }
@@ -85,6 +86,8 @@ public class ItemObject : MonoBehaviour
     {
         // 1. Guardar en el Inventario (Sistema General)
         InventorySystem.Instance.Add(itemData);
+
+        AudioManager.Instance.PlaySFX("Pickup");
 
         // 2. �NUEVO! Poner en la mano del Player (Auto-equipar si es posible)
         // Usamos la referencia que capturamos en OnTriggerEnter
