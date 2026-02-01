@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3222908407787925230
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 17.116247
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.0281124
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7.0281124
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.283731
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.71910673
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.504469
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5008453
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49789017
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5005928
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.50066566
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.759
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -43.66
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -46.484
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9d580819cd4d41f44ba441ca3b690c09, type: 2}
+    - target: {fileID: 919132149155446097, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      propertyPath: m_Name
+      value: CONFIGPUERTAS
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4909947282527234638}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2606501448122241949}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 17100014633952844}
+  m_SourcePrefab: {fileID: 100100000, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+--- !u!1 &2340600559831913407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b9f90ba3212847f45b6f0ec6f4bf51a5, type: 3}
+  m_PrefabInstance: {fileID: 3222908407787925230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4909947282527234638
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340600559831913407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.024452321, y: 0.22570457, z: 0.375727}
+  m_Center: {x: -0.0014608181, y: -0.047947, z: -0.014966293}
+--- !u!114 &2606501448122241949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340600559831913407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a469bd44f0749d64e8c57c6e3d6cac69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  blockingObject: {fileID: 0}
+  disableAfterInteraction: 0
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 17100014633952844}
+        m_TargetAssemblyTypeName: DoorLogic, Assembly-CSharp
+        m_MethodName: AbrirPuerta
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &17100014633952844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340600559831913407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e3b066f689fb8c4a8bcbd16f431d412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorLogic
+  escenaDestino: OfficeStage2
+  sfxPuerta: Closet
+  transitionAnimator: {fileID: 0}
+  esperaSonido: 1
+  duracionTransicion: 2

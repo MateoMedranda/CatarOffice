@@ -10,7 +10,7 @@ EditorBuildSettings:
     guid: d5154d7152cffd74baa48bf1f1ceb07c
   - enabled: 1
     path: Assets/Scenes/OfficeStage2.unity
-    guid: 83a952cff471fbb4fa57b0327b1e5245
+    guid: 14734c48a3d54a04dbfb2bbd22ed7b2b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
