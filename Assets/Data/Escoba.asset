@@ -15,5 +15,5 @@ MonoBehaviour:
   maxStackSize: 1
   id: Escoba
   itemName: Escoba
-  itemIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  itemIcon: {fileID: -1614937337, guid: 75e684be317ca364482d8bf15d4a0872, type: 3}
   itemPrefab: {fileID: 6043875117434978569, guid: 81d772c0c05f0cd4588facfda2591088, type: 3}
