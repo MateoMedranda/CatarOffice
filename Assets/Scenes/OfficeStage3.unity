@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 245828604412fb54f9f6d3902a0f38c1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 32d795098c2372d40b39b01cfe027845, type: 2}
     - target: {fileID: 919132149155446097, guid: 245828604412fb54f9f6d3902a0f38c1, type: 3}
       propertyPath: m_Name
       value: PuertaArchivero
@@ -655,7 +659,7 @@ Transform:
   m_GameObject: {fileID: 594131191}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2, y: -0.982, z: 6.85}
+  m_LocalPosition: {x: 0.7, y: -0.982, z: 6.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -864,7 +868,7 @@ Transform:
   m_GameObject: {fileID: 621287576}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20243797, y: 0.20973143, z: -0.031973284, w: 0.95603836}
-  m_LocalPosition: {x: -5.8, y: 6.521529, z: -7.918585}
+  m_LocalPosition: {x: -6.3, y: 6.521529, z: -7.918585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1534,7 +1538,7 @@ Transform:
   m_GameObject: {fileID: 1178641535}
   serializedVersion: 2
   m_LocalRotation: {x: 0.20243797, y: 0.20973143, z: -0.031973284, w: 0.95603836}
-  m_LocalPosition: {x: -5.8, y: 6.521529, z: -7.918585}
+  m_LocalPosition: {x: -6.3, y: 6.521529, z: -7.918585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1559,6 +1563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DoorLogic
   escenaDestino: OfficeStage2
   sfxPuerta: TargetDoor
+  idSpawnDestino: A-Archivero
   transitionAnimator: {fileID: 1616046522}
   esperaSonido: 0.3
   duracionTransicion: 1
@@ -1685,7 +1690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
