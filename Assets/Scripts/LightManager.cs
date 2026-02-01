@@ -31,6 +31,10 @@ public class LightManager : MonoBehaviour
     [Tooltip("El sprite que se pondrá cuando la luz esté ENCENDIDA.")]
     public Sprite onSprite;
 
+    [Header("Objetos a eliminar")]
+    [Tooltip("Objeto que se destruirá al encender la luz (opcional).")]
+    public GameObject objectToDestroy;
+
     private bool isLightsOn = false;
     private float targetIntensity;
     private float initialIntensity;
@@ -87,6 +91,13 @@ public class LightManager : MonoBehaviour
         if (switchRenderer != null && onSprite != null)
         {
             switchRenderer.sprite = onSprite;
+        }
+
+        // Eliminar objeto si está asignado
+        if (objectToDestroy != null)
+        {
+            Destroy(objectToDestroy);
+            Debug.Log("Objeto eliminado por LightManager: " + objectToDestroy.name);
         }
 
         AudioManager.Instance.PlaySFX("Switch"); // Asumiendo que existe un sonido "Switch" o genérico
