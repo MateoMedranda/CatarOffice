@@ -119,6 +119,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &15920376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15920378}
+  - component: {fileID: 15920377}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &15920377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15920376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4a8dd78ffc79842a2e82cbe1be9756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestManager
+  debugActiveQuests: []
+--- !u!4 &15920378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15920376}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.69359, y: -1.38908, z: 12.21088}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &27926665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,13 +1294,45 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcName
+      value: Cool Oscar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcNameColor.b
+      value: 0.30912495
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcNameColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: dialogos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: 'dialogos.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: f601de92552dbc840bafdabf0bd06731, type: 2}
+      objectReference: {fileID: 11400000, guid: 0c7271ab42ddfaa49adc84f4d86b9f64, type: 2}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: 'dialogos.Array.data[1]'
       value: 
+      objectReference: {fileID: 11400000, guid: f601de92552dbc840bafdabf0bd06731, type: 2}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: 'dialogos.Array.data[2]'
+      value: 
       objectReference: {fileID: 11400000, guid: 70d8c40d2e4ec4a4ea5e000704bf3f5f, type: 2}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.data[0].dialogueIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.data[0].requiredQuest
+      value: BusquedaGrapadora
+      objectReference: {fileID: 0}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2116,6 +2193,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcName
+      value: (Olvidaste su nombre)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcNameColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcNameColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcNameColor.r
+      value: 0.92933345
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: 'dialogos.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: b58a8f0e1acdf614f84dcd22b2952f3e, type: 2}
@@ -2123,6 +2216,18 @@ PrefabInstance:
       propertyPath: 'dialogos.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 14fbc02a720d66e41b51abb70798612a, type: 2}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.data[0].dialogueIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.data[0].requiredQuest
+      value: BuscarOscar
+      objectReference: {fileID: 0}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2323,9 +2428,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: fbbdfe2d29557d24b9209eaea83f8ad2, type: 2}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 198552232}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 15920377}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ActivateQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: QuestManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: BusquedaGrapadora
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4816911165119286370, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 35
@@ -3059,17 +3196,85 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcName
+      value: "M\xF3nica"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcNameColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcNameColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: npcNameColor.r
+      value: 0.6061373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: dialogos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: 'dialogos.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: fa226a09f75cb834885ae5e528c2e164, type: 2}
+      objectReference: {fileID: 11400000, guid: 77b0c8ba36275d54d88adf14c45423f3, type: 2}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: 'dialogos.Array.data[1]'
       value: 
+      objectReference: {fileID: 11400000, guid: fa226a09f75cb834885ae5e528c2e164, type: 2}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: 'dialogos.Array.data[2]'
+      value: 
       objectReference: {fileID: 11400000, guid: 279ac115724b9ca4ca70cbc77a9d7cbe, type: 2}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.data[0].dialogueIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: questDependencies.Array.data[0].requiredQuest
+      value: BusquedaGrapadora
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 198552232}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 15920377}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ActivateQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: QuestManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: BuscarOscar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739746766800603062, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
+      propertyPath: alInteractuar.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4816911165119286370, guid: 76322281b78f3294dbb9791b29eea1d8, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 66
@@ -3546,3 +3751,4 @@ SceneRoots:
   - {fileID: 1880830832}
   - {fileID: 967433891}
   - {fileID: 549964986}
+  - {fileID: 15920378}

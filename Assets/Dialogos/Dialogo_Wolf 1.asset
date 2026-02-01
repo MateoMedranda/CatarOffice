@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Dialogo_Wolf 1
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   frases:
-  - No me llamo Oscar
-  - "Ni idea de donde est\xE9\r\n"
+  - Hola
