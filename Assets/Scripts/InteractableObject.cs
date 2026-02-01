@@ -12,11 +12,12 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public InventoryItemData requiredItem;
 
     [Header("Conexiones")]
+    // Esta es la lista que ve vacía en el inspector. Aquí conectaremos la puerta.
     public UnityEvent onInteract;
 
     public void Interactuar()
     {
-        // 1. CHEQUEO DE BLOQUEO
+        // 1. CHEQUEO DE BLOQUEO (La Escoba)
         if (blockingObject != null && blockingObject.activeSelf)
         {
             Debug.Log("⛔ Interacción bloqueada por: " + blockingObject.name);
