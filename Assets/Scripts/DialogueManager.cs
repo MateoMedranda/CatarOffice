@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
 
     // Variables para el efecto de escritura y nombre
     private string currentNPCName;
-    private string currentNameColorHex; // Store the hex color
+    private string currentNameColorHex;
     private Coroutine typingCoroutine;
     [SerializeField] private float typingSpeed = 0.05f; 
 
@@ -36,11 +36,10 @@ public class DialogueManager : MonoBehaviour
         isDialogueActive = true;
         currentNPCName = nombreNPC;
         
-        // Convert Color to Hex
         currentNameColorHex = "#" + ColorUtility.ToHtmlStringRGB(colorNombre);
         
         frases.Clear();
-        textoPantalla.text = ""; // Clear text initially
+        textoPantalla.text = "";
 
         foreach (string frase in datos.frases)
         {
@@ -49,7 +48,6 @@ public class DialogueManager : MonoBehaviour
 
         MostrarSiguienteFrase();
         
-        // Start bigger (e.g., 1.2) and go to 1.0
         animationCoroutine = StartCoroutine(AnimateScale(new Vector3(1.2f, 1.2f, 1.2f), Vector3.one, 0.3f));
     }
 
@@ -84,7 +82,6 @@ public class DialogueManager : MonoBehaviour
     {
         textoPantalla.text = ""; 
         
-        // Use the hex color
         string prefix = $"<color={currentNameColorHex}>{currentNPCName}:</color> ";
         textoPantalla.text = prefix;
         
@@ -108,11 +105,7 @@ public class DialogueManager : MonoBehaviour
         while (t < 1)
         {
             t += Time.deltaTime / duration;
-            // Add a little "overshoot" or "elastic" ease out for "attractive" look if opening
-            // Simple ease out for closing
-            float ease = t;
-            // Simple SmoothStep
-            ease = t * t * (3f - 2f * t); 
+            float ease = t * t * (3f - 2f * t); 
             
             panelDialogo.transform.localScale = Vector3.Lerp(start, end, ease);
             yield return null;
