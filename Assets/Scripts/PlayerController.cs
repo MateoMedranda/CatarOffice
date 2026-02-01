@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float radioInteraccion = 2f;
     [SerializeField] private Animator anim;
     [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] private float inputDeadzone = 0.1f;
     
     private Rigidbody rb;
     private Vector3 movement;
@@ -56,9 +57,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector2 inputVector = playerControls.Player.Move.ReadValue<Vector2>();
+        if (inputVector.magnitude < inputDeadzone)
+        {
+            inputVector = Vector2.zero;
+        }
         movement = new Vector3(inputVector.x, 0, inputVector.y).normalized;
 
-        anim.SetBool(IS_WALK_PARAM, movement != Vector3.zero);
+        if (anim != null)
+        {
+            anim.SetBool(IS_WALK_PARAM, movement != Vector3.zero);
+        }
 
         // --- LÓGICA DE SONIDO DE PASOS ---
         if (movement != Vector3.zero)
@@ -75,12 +83,12 @@ public class PlayerController : MonoBehaviour
             stepTimer = 0; // Reiniciar para que suene inmediato al volver a caminar
         }
 
-        if (inputVector.x != 0 && inputVector.x < 0)
+        if (playerSprite != null && inputVector.x != 0 && inputVector.x < 0)
         {
             playerSprite.flipX = true;
         }
 
-        if (inputVector.x != 0 && inputVector.x > 0)
+        if (playerSprite != null && inputVector.x != 0 && inputVector.x > 0)
         {
             playerSprite.flipX = false;
         }
