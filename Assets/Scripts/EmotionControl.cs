@@ -20,8 +20,8 @@ public class EmotionControl : MonoBehaviour
 
     void Update()
     {
-        // Detectar tecla E (funciona porque activó "Both" en inputs)
-        if (Input.GetKeyDown(KeyCode.E))
+        // Detectar tecla Q (funciona porque activó "Both" en inputs)
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             // Avanzar al siguiente (0 -> 1 -> 2 -> 0...)
             indiceActual++;

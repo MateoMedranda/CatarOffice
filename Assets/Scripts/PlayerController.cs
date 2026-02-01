@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         }
         
         // --- SOLTAR ---
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("--- INICIANDO DROP ---");
             DropItem();

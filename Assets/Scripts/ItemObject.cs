@@ -6,7 +6,7 @@ public class ItemObject : MonoBehaviour
 {
     public InventoryItemData itemData;
 
-    // Estado de interacción
+    // Estado de interacciï¿½n
     private bool _isPlayerNearby = false;
     private bool _canPickup = false; // Para el delay inicial
 
@@ -15,7 +15,7 @@ public class ItemObject : MonoBehaviour
 
     private void Start()
     {
-        // Del código 2: Espera 1 segundo antes de permitir interacción (evita clics accidentales al spawnear)
+        // Del cï¿½digo 2: Espera 1 segundo antes de permitir interacciï¿½n (evita clics accidentales al spawnear)
         StartCoroutine(EnablePickupDelay());
     }
 
@@ -27,8 +27,8 @@ public class ItemObject : MonoBehaviour
 
     private void Update()
     {
-        // Solo interactúa si: El jugador está cerca + Pasó el tiempo de espera + Presiona J
-        if (_isPlayerNearby && _canPickup && Input.GetKeyDown(KeyCode.J))
+        // Solo interactï¿½a si: El jugador estï¿½ cerca + Pasï¿½ el tiempo de espera + Presiona E
+        if (_isPlayerNearby && _canPickup && Input.GetKeyDown(KeyCode.E))
         {
             HandleInteraction();
         }
@@ -38,22 +38,22 @@ public class ItemObject : MonoBehaviour
     {
         if (InventorySystem.Instance.CanAdd(itemData))
         {
-            // Si la UI ya está abierta, J sirve para confirmar
+            // Si la UI ya estï¿½ abierta, J sirve para confirmar
             if (ItemInfoUI.Instance.infoPanel.activeSelf)
             {
                 ItemInfoUI.Instance.OnSaveButtonClick();
             }
             else
             {
-                // Si está cerrada, J la abre para ver info
+                // Si estï¿½ cerrada, J la abre para ver info
                 ItemInfoUI.Instance.ShowItemInfo(this);
             }
         }
         else
         {
-            // Bloqueo físico si no hay espacio en inventario
+            // Bloqueo fï¿½sico si no hay espacio en inventario
             GetComponent<Collider>().isTrigger = false;
-            Debug.Log("Inventario lleno, el objeto se vuelve sólido.");
+            Debug.Log("Inventario lleno, el objeto se vuelve sï¿½lido.");
         }
     }
 
@@ -66,7 +66,7 @@ public class ItemObject : MonoBehaviour
             // Capturamos el script del Player al entrar en la zona para usarlo luego
             _nearbyPlayerScript = other.GetComponent<PlayerController>();
 
-            // Aquí podrías mostrar un mensajito flotante: "Presiona J para interactuar"
+            // Aquï¿½ podrï¿½as mostrar un mensajito flotante: "Presiona J para interactuar"
         }
     }
 
@@ -80,18 +80,18 @@ public class ItemObject : MonoBehaviour
         }
     }
 
-    // Esta función es llamada por el ItemInfoUI (botón Guardar) o al confirmar con J
+    // Esta funciï¿½n es llamada por el ItemInfoUI (botï¿½n Guardar) o al confirmar con J
     public void ConfirmPickup()
     {
         // 1. Guardar en el Inventario (Sistema General)
         InventorySystem.Instance.Add(itemData);
 
-        // 2. ¡NUEVO! Poner en la mano del Player (Auto-equipar si es posible)
+        // 2. ï¿½NUEVO! Poner en la mano del Player (Auto-equipar si es posible)
         // Usamos la referencia que capturamos en OnTriggerEnter
         if (_nearbyPlayerScript != null)
         {
             _nearbyPlayerScript.currentItem = itemData;
-            Debug.Log($"¡Objeto {itemData.itemName} auto-equipado en la mano!");
+            Debug.Log($"ï¿½Objeto {itemData.itemName} auto-equipado en la mano!");
         }
 
         // 3. Destruir el objeto del suelo
