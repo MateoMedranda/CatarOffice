@@ -11,23 +11,39 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public bool disableAfterInteraction;
 
     [Header("Conexiones")]
-    // Esta es la lista que ve vacía en el inspector. Aquí conectaremos la puerta.
     public UnityEvent onInteract;
 
     public void Interactuar()
     {
-        // 1. CHEQUEO DE BLOQUEO (La Escoba)
+        // 1. CHEQUEO DE BLOQUEO
         if (blockingObject != null && blockingObject.activeSelf)
         {
-            Debug.Log("Interacción bloqueada por: " + blockingObject.name);
-            
-            // AGREGADO: Sonido de Error/Xray
-            AudioManager.Instance.PlaySFX("Error"); 
-            
-            return; // Cortamos aquí, no dejamos pasar.
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX("Error");
+            }
+            return;
         }
 
-        // 2. ÉXITO (Aquí se llama a lo que pongamos en la lista)
+        // --- SOLUCIÓN DEFINITIVA PARA LA LUPA ---
+        
+        // A) Ocultamos la lupa visualmente
+        InteractionPrompt prompt = GetComponent<InteractionPrompt>();
+        if (prompt != null)
+        {
+            prompt.Hide();
+            prompt.enabled = false; // Apagar el script de la lupa
+        }
+
+        // B) ¡IMPORTANTE! Apagamos el Collider para que el Player deje de detectarlo
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+        {
+            col.enabled = false; 
+        }
+        // ---------------------------------------
+
+        // 2. ÉXITO
         onInteract.Invoke();
 
         if (disableAfterInteraction)
