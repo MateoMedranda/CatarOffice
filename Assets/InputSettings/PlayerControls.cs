@@ -109,6 +109,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Emotions"",
+                    ""type"": ""Button"",
+                    ""id"": ""a39ad556-03fa-4f89-a310-84a6609abe01"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -243,6 +252,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""interactuar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd61b94d-109f-4d5e-a120-75803e97834c"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""interactuar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""236721e7-2912-4ae1-ab53-ef2bce55f28a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Emotions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""445de2dc-8865-4686-b3e9-14cefa5fba25"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Emotions"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -253,6 +295,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_interactuar = m_Player.FindAction("interactuar", throwIfNotFound: true);
+        m_Player_Emotions = m_Player.FindAction("Emotions", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -335,6 +378,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_interactuar;
+    private readonly InputAction m_Player_Emotions;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -354,6 +398,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/interactuar".
         /// </summary>
         public InputAction @interactuar => m_Wrapper.m_Player_interactuar;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Emotions".
+        /// </summary>
+        public InputAction @Emotions => m_Wrapper.m_Player_Emotions;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -386,6 +434,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @interactuar.started += instance.OnInteractuar;
             @interactuar.performed += instance.OnInteractuar;
             @interactuar.canceled += instance.OnInteractuar;
+            @Emotions.started += instance.OnEmotions;
+            @Emotions.performed += instance.OnEmotions;
+            @Emotions.canceled += instance.OnEmotions;
         }
 
         /// <summary>
@@ -403,6 +454,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @interactuar.started -= instance.OnInteractuar;
             @interactuar.performed -= instance.OnInteractuar;
             @interactuar.canceled -= instance.OnInteractuar;
+            @Emotions.started -= instance.OnEmotions;
+            @Emotions.performed -= instance.OnEmotions;
+            @Emotions.canceled -= instance.OnEmotions;
         }
 
         /// <summary>
@@ -457,5 +511,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteractuar(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Emotions" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEmotions(InputAction.CallbackContext context);
     }
 }
