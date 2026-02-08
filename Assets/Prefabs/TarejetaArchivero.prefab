@@ -112,8 +112,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02000002, y: 0.02, z: 0.020000003}
-  m_Center: {x: 0.00000011920929, y: 0, z: 0}
+  m_Size: {x: 0.14342454, y: 0.02, z: 0.020000003}
+  m_Center: {x: -0.006684951, y: -1.8453634e-19, z: -0.0000000011484887}
 --- !u!114 &1673413527562206334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
   blockingObject: {fileID: 0}
-  disableAfterInteraction: 1
+  requiredItem: {fileID: 0}
+  interactionCollider: {fileID: 0}
   onInteract:
     m_PersistentCalls:
       m_Calls:

@@ -1,14 +1,16 @@
 
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class ItemSlot : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI _itemName;
 
-    [SerializeField] Image _itemIcon;
+    [SerializeField] UnityEngine.UI.Image _itemIcon;
 
     [SerializeField] GameObject _stackObj;
 
@@ -19,19 +21,29 @@ public class ItemSlot : MonoBehaviour
     public void Set(InventoryItem item)
     {
         currentItem = item;
-        _itemName.text = item.data.itemName;
-        _itemIcon.sprite = item.data.itemIcon;
 
-        if (item.stackSize <= 1)
+        // VERIFICACIÓN DE SEGURIDAD (Esto evita el error rojo si la casilla está vacía)
+        if (_itemName != null)
         {
-            _stackObj.SetActive(false);
+            _itemName.text = item.data.itemName;
+        }
+
+        if (_itemIcon != null)
+        {
+            _itemIcon.sprite = item.data.itemIcon;
+        }
+
+        // CAMBIO: Ahora solo se oculta si es 0 o menos. Si es 1, SE MUESTRA.
+        if (item.stackSize <= 0)
+        {
+            if (_stackObj != null) _stackObj.SetActive(false);
         }
         else
         {
-            _stackNumber.text = item.stackSize.ToString();
+            if (_stackObj != null) _stackObj.SetActive(true);
+            if (_stackNumber != null) _stackNumber.text = item.stackSize.ToString();
         }
-        
-        // Oscurecer el item al iniciar
+
         SetDarkened(true);
     }
 
@@ -69,4 +81,3 @@ public class ItemSlot : MonoBehaviour
         return currentItem;
     }
 }
-

@@ -1,13 +1,17 @@
-[System.Serializable]
+using UnityEngine;
+using System;
+
+[Serializable] // Importante para que se vea en el Inspector
 public class InventoryItem
 {
     public InventoryItemData data;
-    public int stackSize;
+    public int stackSize; // <--- ESTO ES LO QUE NECESITAMOS PARA APILAR
 
-    public InventoryItem(InventoryItemData itemData)
+    // Constructor que pide su sistema antiguo
+    public InventoryItem(InventoryItemData source)
     {
-        data = itemData;
-        stackSize = 1; // Inicializamos en 1 al crear el objeto
+        data = source;
+        stackSize = 1; // Empieza con 1
     }
 
     public void AddStack()

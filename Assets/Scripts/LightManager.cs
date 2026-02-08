@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class LightManager : MonoBehaviour
 {
+    [Header("MEMORIA (¡Importante!)")]
+    [Tooltip("Escribe AQUÍ el mismo ID que pusiste en el ObjectPersistence del interruptor. Ej: Luz_Principal_Oficina")]
+    public string memoryID;
+
     [Header("Referencias de Luces")]
     [Tooltip("La luz direccional principal de la escena.")]
     public Light directionalLight;
@@ -36,70 +40,80 @@ public class LightManager : MonoBehaviour
     public GameObject objectToDestroy;
 
     private bool isLightsOn = false;
-    private float targetIntensity;
-    private float initialIntensity;
     private float transitionTimer = 0f;
 
     private void Start()
     {
-        // Estado Inicial: Oscuridad
-        if (directionalLight != null)
+        // 1. PREGUNTAR A LA MEMORIA: ¿Ya prendieron esta luz antes?
+        if (!string.IsNullOrEmpty(memoryID) && QuestManager.Instance != null && QuestManager.Instance.IsQuestActive(memoryID))
         {
-            directionalLight.intensity = dimIntensity;
+            // SI YA ESTABA PRENDIDA: Forzamos el estado de luz INMEDIATAMENTE
+            // CORRECCIÓN AQUÍ: UnityEngine.Debug
+            UnityEngine.Debug.Log("[LightManager] Recordando que la luz estaba prendida. Restaurando...");
+            SetLightsInstantOn();
         }
+        else
+        {
+            // SI NO: Iniciamos en oscuridad normal
+            SetLightsInstantOff();
+        }
+    }
 
-        // Controlar la luz ambiente también para que sea oscuro de verdad
+    private void SetLightsInstantOff()
+    {
+        isLightsOn = false;
+        if (directionalLight != null) directionalLight.intensity = dimIntensity;
         RenderSettings.ambientIntensity = dimAmbientIntensity;
-
-        if (playerLight != null)
-        {
-            playerLight.gameObject.SetActive(true); // Aseguramos que la luz del jugador esté prendida
-        }
+        if (playerLight != null) playerLight.gameObject.SetActive(true);
     }
 
-    private void Update()
+    private void SetLightsInstantOn()
     {
-        // Animación simple de intensidad si estamos en transición
-        if (isLightsOn && directionalLight != null && (directionalLight.intensity < normalIntensity || RenderSettings.ambientIntensity < normalAmbientIntensity))
-        {
-            transitionTimer += Time.deltaTime;
-            float t = transitionTimer / transitionDuration;
-            
-            // Lerp de luz direccional
-            directionalLight.intensity = Mathf.Lerp(dimIntensity, normalIntensity, t);
-            
-            // Lerp de luz ambiente
-            RenderSettings.ambientIntensity = Mathf.Lerp(dimAmbientIntensity, normalAmbientIntensity, t);
-        }
-    }
-
-    /// <summary>
-    /// Función pública para llamar desde el InteractableObject (UnityEvent).
-    /// </summary>
-    public void TurnOnLights()
-    {
-        if (isLightsOn) return; // Ya está encendida
-
-        Debug.Log("Encendiendo luces...");
         isLightsOn = true;
-        transitionTimer = 0f;
 
-        // Opcional: Apagar la luz del jugador cuando se enciende la luz principal
-        // if (playerLight != null) playerLight.gameObject.SetActive(false);
-        
-        // Cambiar el sprite del interruptor si está asignado
+        // Luces al máximo
+        if (directionalLight != null) directionalLight.intensity = normalIntensity;
+        RenderSettings.ambientIntensity = normalAmbientIntensity;
+
+        // Cambiar sprite del interruptor
         if (switchRenderer != null && onSprite != null)
         {
             switchRenderer.sprite = onSprite;
         }
 
-        // Eliminar objeto si está asignado
+        // Eliminar monstruo/sombra si aún existe
         if (objectToDestroy != null)
         {
             Destroy(objectToDestroy);
-            Debug.Log("Objeto eliminado por LightManager: " + objectToDestroy.name);
         }
+    }
 
-        AudioManager.Instance.PlaySFX("Switch"); // Asumiendo que existe un sonido "Switch" o genérico
+    private void Update()
+    {
+        // Animación suave SOLO si estamos transicionando en tiempo real
+        if (isLightsOn && directionalLight != null && (directionalLight.intensity < normalIntensity || RenderSettings.ambientIntensity < normalAmbientIntensity))
+        {
+            transitionTimer += Time.deltaTime;
+            float t = transitionTimer / transitionDuration;
+
+            directionalLight.intensity = Mathf.Lerp(dimIntensity, normalIntensity, t);
+            RenderSettings.ambientIntensity = Mathf.Lerp(dimAmbientIntensity, normalAmbientIntensity, t);
+        }
+    }
+
+    public void TurnOnLights()
+    {
+        if (isLightsOn) return;
+
+        // CORRECCIÓN AQUÍ TAMBIÉN: UnityEngine.Debug
+        UnityEngine.Debug.Log("Encendiendo luces (Evento)...");
+        isLightsOn = true;
+        transitionTimer = 0f;
+
+        if (switchRenderer != null && onSprite != null) switchRenderer.sprite = onSprite;
+
+        if (objectToDestroy != null) Destroy(objectToDestroy);
+
+        AudioManager.Instance.PlaySFX("Switch");
     }
 }

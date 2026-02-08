@@ -1,6 +1,6 @@
 using Unity.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem; 
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,19 +8,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float radioInteraccion = 2f;
     [SerializeField] private Animator anim;
     [SerializeField] private SpriteRenderer playerSprite;
-    
+
     private Rigidbody rb;
     private Vector3 movement;
     private PlayerControls playerControls;
 
-    private const  string IS_WALK_PARAM = "IsWalk";
+    private const string IS_WALK_PARAM = "IsWalk";
 
     [Header("Configuraci�n de Soltar (Drop)")]
     public Transform dropPoint;
     public InventoryItemData currentItem;
     private int selectedIndex = -1; // -1 significa sin selección
 
-    private float stepTimer = 0f;
+    private float stepTimer = 0f;
     [SerializeField] private float tiempoEntrePasos = 0.5f;
 
     private void Awake()
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentItem = null; // Comenzamos sin item en la mano
-        if (rb != null)
+        if (rb != null)
         {
             rb.useGravity = false;
             rb.constraints |= RigidbodyConstraints.FreezePositionY;
@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool(IS_WALK_PARAM, movement != Vector3.zero);
 
-        // --- LÓGICA DE SONIDO DE PASOS ---
-        if (movement != Vector3.zero)
+        // --- LÓGICA DE SONIDO DE PASOS ---
+        if (movement != Vector3.zero)
         {
             stepTimer -= Time.deltaTime;
             if (stepTimer <= 0)
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             stepTimer = 0; // Reiniciar para que suene inmediato al volver a caminar
-        }
+        }
 
         if (inputVector.x != 0 && inputVector.x < 0)
         {
@@ -96,8 +96,8 @@ public class PlayerController : MonoBehaviour
 
         foreach (var col in cercanos)
         {
-            // 1. Buscamos IInteractable en el objeto O en sus padres
-            IInteractable interactable = col.GetComponent<IInteractable>();
+            // 1. Buscamos IInteractable en el objeto O en sus padres
+            IInteractable interactable = col.GetComponent<IInteractable>();
             if (interactable == null)
             {
                 interactable = col.GetComponentInParent<IInteractable>();
@@ -105,18 +105,18 @@ public class PlayerController : MonoBehaviour
 
             if (interactable != null)
             {
-                // 2. Si es un InteractableObject (nuestra clase concreta), revisamos si pide un collider específico
-                if (interactable is InteractableObject objScript)
+                // 2. Si es un InteractableObject (nuestra clase concreta), revisamos si pide un collider específico
+                if (interactable is InteractableObject objScript)
                 {
                     if (objScript.interactionCollider != null && objScript.interactionCollider != col)
                     {
-                        // Si tiene un collider asignado y NO es el que tocamos, ignoramos.
-                        continue;
+                        // Si tiene un collider asignado y NO es el que tocamos, ignoramos.
+                        continue;
                     }
                 }
 
-                // 3. Buscamos el Prompt (puede estar en el hijo o en el padre junto al script)
-                InteractionPrompt prompt = col.GetComponent<InteractionPrompt>();
+                // 3. Buscamos el Prompt (puede estar en el hijo o en el padre junto al script)
+                InteractionPrompt prompt = col.GetComponent<InteractionPrompt>();
                 if (prompt == null)
                 {
                     prompt = col.GetComponentInParent<InteractionPrompt>();
@@ -134,15 +134,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // State machine for prompts
-        if (closestPrompt != currentPrompt)
+        // State machine for prompts
+        if (closestPrompt != currentPrompt)
         {
             if (currentPrompt != null) currentPrompt.Hide();
-            
+
             currentPrompt = closestPrompt;
-            
+
             if (currentPrompt != null) currentPrompt.Show();
-        }        
+        }
         // --- SELECCIONAR ITEM CON 1, 2, 3 ---
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
         {
             SelectInventoryItem(2);
         }
-        
+
         // --- SOLTAR ---
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -184,39 +184,39 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // Deseleccionar el anterior si había
-        if (selectedIndex >= 0 && selectedIndex < InventorySystem.Instance.Inventory.Count)
+        // Deseleccionar el anterior si había
+        if (selectedIndex >= 0 && selectedIndex < InventorySystem.Instance.Inventory.Count)
         {
             HighlightInventoryItem(selectedIndex, false);
         }
 
-        // Obtener el item del inventario por índice
-        selectedIndex = index;
+        // Obtener el item del inventario por índice
+        selectedIndex = index;
         InventoryItem selectedItem = InventorySystem.Instance.Inventory[index];
         currentItem = selectedItem.data;
-        
+
         // Resaltar el item seleccionado
         HighlightInventoryItem(index, true);
 
         AudioManager.Instance.PlaySFX("Change");
-        
+
         Debug.Log($"Item seleccionado: {currentItem.itemName} (Posición {index + 1})");
     }
 
     void HighlightInventoryItem(int index, bool highlight)
     {
-        InventoryUI inventoryUI = FindObjectOfType<InventoryUI>();
+        InventoryUI inventoryUI = FindFirstObjectByType<InventoryUI>();
         if (inventoryUI == null) return;
 
-        // Obtener el transform del contenedor de items
-        Transform inventoryContainer = inventoryUI.transform.Find("InventoryContainer");
+        // Obtener el transform del contenedor de items
+        Transform inventoryContainer = inventoryUI.transform.Find("InventoryContainer");
         if (inventoryContainer == null)
         {
             inventoryContainer = inventoryUI.transform;
         }
 
-        // Contar solo los ItemSlot (no otros componentes)
-        int slotCount = 0;
+        // Contar solo los ItemSlot (no otros componentes)
+        int slotCount = 0;
         foreach (Transform child in inventoryContainer)
         {
             ItemSlot slot = child.GetComponent<ItemSlot>();
@@ -234,38 +234,38 @@ public class PlayerController : MonoBehaviour
 
     void DropItem()
     {
-        // Chequeo 1: �Tienes un punto de salida?
-        if (dropPoint == null)
+        // Chequeo 1: �Tienes un punto de salida?
+        if (dropPoint == null)
         {
             Debug.Log("ERROR: �El 'Drop Point' se ha borrado o no est� asignado!");
             return;
         }
 
-        // Chequeo 2: �Tienes algo en la mano?
-        if (currentItem == null)
+        // Chequeo 2: �Tienes algo en la mano?
+        if (currentItem == null)
         {
             Debug.Log("ERROR: Tu mano est� vac�a (Current Item es 'None'). Arrastra un �tem al Player para probar.");
             return;
         }
 
-        // Chequeo 3: �El �tem sabe qu� forma tiene?
-        if (currentItem.itemPrefab == null)
+        // Chequeo 3: �El �tem sabe qu� forma tiene?
+        if (currentItem.itemPrefab == null)
         {
             Debug.Log("ERROR: El �tem '" + currentItem.name + "' no tiene un Prefab asignado en su archivo.");
             return;
         }
 
-        // --- SI LLEGAMOS AQU�, TODO EST� BIEN ---
-        Debug.Log("Todo correcto. Creando objeto...");
+        // --- SI LLEGAMOS AQU�, TODO EST� BIEN ---
+        Debug.Log("Todo correcto. Creando objeto...");
 
         Vector3 dropPosition = dropPoint.position;
         dropPosition.y -= 0.75f; // Bajar el objeto 0.5 unidades m�s en el suelo
-        Instantiate(currentItem.itemPrefab, dropPosition, dropPoint.rotation);
+        Instantiate(currentItem.itemPrefab, dropPosition, dropPoint.rotation);
 
         AudioManager.Instance.PlaySFX("Drop");
 
-        // BORRAR DEL INVENTARIO
-        if (InventorySystem.Instance != null)
+        // BORRAR DEL INVENTARIO
+        if (InventorySystem.Instance != null)
         {
             Debug.Log("Solicitando borrar del inventario...");
             InventorySystem.Instance.Remove(currentItem);
@@ -276,7 +276,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentItem = null; // Vaciamos la mano
-        Debug.Log("��XITO! Objeto soltado y borrado.");
+        Debug.Log("��XITO! Objeto soltado y borrado.");
     }
 
     private void AlInteractuar(InputAction.CallbackContext context)
@@ -284,11 +284,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Intentando interactuar...");
 
         Collider[] cercanos = Physics.OverlapSphere(transform.position, radioInteraccion);
-        
+
         foreach (var col in cercanos)
         {
-            // Misma lógica: buscar en objeto o padre
-            IInteractable interactable = col.GetComponent<IInteractable>();
+            // Misma lógica: buscar en objeto o padre
+            IInteractable interactable = col.GetComponent<IInteractable>();
             if (interactable == null)
             {
                 interactable = col.GetComponentInParent<IInteractable>();
@@ -296,8 +296,8 @@ public class PlayerController : MonoBehaviour
 
             if (interactable != null)
             {
-                // Validación de collider específico
-                if (interactable is InteractableObject objScript)
+                // Validación de collider específico
+                if (interactable is InteractableObject objScript)
                 {
                     if (objScript.interactionCollider != null && objScript.interactionCollider != col)
                     {

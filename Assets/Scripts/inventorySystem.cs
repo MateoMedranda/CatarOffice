@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
@@ -18,8 +19,18 @@ public class InventorySystem : MonoBehaviour
 
     public void Awake()
     {
-        Inventory = new List<InventoryItem>();
-        Instance = this;
+        // SINGLETON CON INMORTALIDAD
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // <--- ¡ESTA ES LA LÍNEA MÁGICA!
+            Inventory = new List<InventoryItem>();
+        }
+        else
+        {
+            // Si ya existe uno (porque venimos de otra escena), nos destruimos para no duplicar
+            Destroy(gameObject);
+        }
     }
 
     // Verifica si cabe un objeto más (sin importar si ya tienes uno igual)
@@ -31,23 +42,46 @@ public class InventorySystem : MonoBehaviour
             return true;
         }
 
-        Debug.Log("Inventario lleno: No caben más objetos.");
+        UnityEngine.Debug.Log("Inventario lleno: No caben más objetos.");
         return false;
     }
 
     public void Add(InventoryItemData itemData)
     {
-        // Doble verificación de seguridad
-        if (Inventory.Count >= maxDistinctItems) return;
+        // 1. PRIMERO BUSCAMOS SI YA TENEMOS ESE OBJETO
+        InventoryItem value = null;
 
-        // AQUÍ ESTÁ EL CAMBIO CLAVE:
-        // Siempre creamos un NUEVO item y lo agregamos a la lista.
-        // No buscamos si ya existe para apilarlo.
-        InventoryItem newItem = new InventoryItem(itemData);
-        Inventory.Add(newItem);
-        Debug.Log($"Agregado slot individual para: {itemData.itemName}");
+        foreach (InventoryItem i in Inventory)
+        {
+            if (i.data == itemData)
+            {
+                value = i;
+                break;
+            }
+        }
 
-        // Actualizamos la barra visual
+        // 2. DECISIÓN: ¿SUMAR O CREAR?
+        if (value != null)
+        {
+            // YA EXISTE -> Solo aumentamos el contador
+            value.stackSize++;
+            UnityEngine.Debug.Log($"[SISTEMA] Se sumó 1 a {itemData.itemName}. Total: {value.stackSize}");
+        }
+        else
+        {
+            // ES NUEVO -> Verificamos espacio y creamos
+            if (Inventory.Count >= maxDistinctItems)
+            {
+                UnityEngine.Debug.Log("[SISTEMA] Inventario lleno, no cabe slot nuevo.");
+                return;
+            }
+
+            InventoryItem newItem = new InventoryItem(itemData);
+            Inventory.Add(newItem);
+            UnityEngine.Debug.Log($"[SISTEMA] Creado slot nuevo para: {itemData.itemName}");
+        }
+
+        // 3. AVISAR A LA UI
         onInventoryChangedCallback?.Invoke();
     }
 

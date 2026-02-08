@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
@@ -28,23 +29,37 @@ public class PlayerSpawner : MonoBehaviour
         }
 
         // 4. Mover al jugador
+        // 4. Mover al jugador
         if (puntoCorrecto != null)
         {
-            // Desactivar CharacterController momentáneamente si lo usa (para evitar conflictos)
+            // Desactivar CharacterController momentáneamente si lo usa
             CharacterController cc = GetComponent<CharacterController>();
             if (cc != null) cc.enabled = false;
 
-            // EL TELETRANSPORTE
+            // A. POSICIÓN (Esto ya lo tenía bien)
             transform.position = puntoCorrecto.transform.position;
-            transform.rotation = puntoCorrecto.transform.rotation; // Para que mire al lado correcto
+
+            // B. ROTACIÓN (¡BORRE ESTO! Causaba el error de la sombra)
+            // transform.rotation = puntoCorrecto.transform.rotation; 
+
+            // C. ORIENTACIÓN (¡NUEVO!) 
+            // Buscamos el SpriteRenderer en los hijos (el dibujo del personaje)
+            SpriteRenderer spriteVisual = GetComponentInChildren<SpriteRenderer>();
+
+            if (spriteVisual != null)
+            {
+                // Le aplicamos el flip directamente según lo que diga la casilla del SpawnPoint
+                spriteVisual.flipX = puntoCorrecto.mirarIzquierda;
+                UnityEngine.Debug.Log($"[SPAWNER] Acomodando sprite. Mirar Izquierda: {puntoCorrecto.mirarIzquierda}");
+            }
 
             if (cc != null) cc.enabled = true;
 
-            Debug.Log("¡Jugador movido al Spawn: " + idDestino + "!");
+            UnityEngine.Debug.Log("¡Jugador movido al Spawn: " + idDestino + "!");
         }
         else
         {
-            Debug.LogWarning("No encontré ningún SpawnPoint con el ID: " + idDestino);
+            UnityEngine.Debug.LogWarning("No encontré ningún SpawnPoint con el ID: " + idDestino);
         }
     }
 }

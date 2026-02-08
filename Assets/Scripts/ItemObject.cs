@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class ItemObject : MonoBehaviour
@@ -54,7 +55,7 @@ public class ItemObject : MonoBehaviour
             // Bloqueo f�sico si no hay espacio en inventario
             GetComponent<Collider>().isTrigger = false;
             AudioManager.Instance.PlaySFX("Error");
-            Debug.Log("Inventario lleno, el objeto se vuelve s�lido.");
+            UnityEngine.Debug.Log("Inventario lleno, el objeto se vuelve s�lido.");
         }
     }
 
@@ -89,13 +90,20 @@ public class ItemObject : MonoBehaviour
 
         AudioManager.Instance.PlaySFX("Pickup");
 
-        // 2. �NUEVO! Poner en la mano del Player (Auto-equipar si es posible)
-        // Usamos la referencia que capturamos en OnTriggerEnter
+        // 2. Poner en la mano del Player (Auto-equipar)
         if (_nearbyPlayerScript != null)
         {
             _nearbyPlayerScript.currentItem = itemData;
-            Debug.Log($"�Objeto {itemData.itemName} auto-equipado en la mano!");
+            UnityEngine.Debug.Log($"¡Objeto {itemData.itemName} auto-equipado en la mano!");
         }
+
+        // --- BLOQUE NUEVO: AVISAR A LA MEMORIA ANTES DE MORIR ---
+        ObjectPersistence memory = GetComponent<ObjectPersistence>();
+        if (memory != null)
+        {
+            memory.SaveState(); // <--- ¡AQUÍ GUARDAMOS QUE YA SE RECOGIÓ!
+        }
+        // --------------------------------------------------------
 
         // 3. Destruir el objeto del suelo
         Destroy(gameObject);

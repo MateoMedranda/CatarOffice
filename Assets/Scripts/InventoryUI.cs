@@ -1,134 +1,109 @@
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class InventoryUI : MonoBehaviour
 {
+    [Header("Referencias OBLIGATORIAS")]
     public GameObject itemSlotPrefab;
+    public Transform container; // <--- ¡RECUPERAMOS ESTA REFERENCIA VITAL!
 
     [Header("Configuración Visual")]
-    public Vector2 itemSize = new Vector2(85, 85); // Tu configuración de tamaño
-    public float spacing = 20f; // <--- NUEVO: Espacio entre objetos
-    
-    private TextMeshProUGUI instructionText;
+    public Vector2 itemSize = new Vector2(85, 85);
+    public float spacing = 20f;
+
+    private Canvas _myCanvas;
+
+    void Awake()
+    {
+        // Buscamos el Canvas en este objeto o en los padres
+        _myCanvas = GetComponent<Canvas>();
+        if (_myCanvas == null) _myCanvas = GetComponentInParent<Canvas>();
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        if (InventorySystem.Instance != null) InventorySystem.Instance.onInventoryChangedCallback += OnUpdateInventory;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (InventorySystem.Instance != null) InventorySystem.Instance.onInventoryChangedCallback -= OnUpdateInventory;
+    }
 
     void Start()
     {
-        InventorySystem.Instance.onInventoryChangedCallback += OnUpdateInventory;
-
-        // --- APLICAR ESPACIADO ---
-        // Buscamos el componente que ordena (Horizontal Layout Group) y le ponemos tu valor
-        HorizontalLayoutGroup layout = GetComponent<HorizontalLayoutGroup>();
-        if (layout != null)
+        // 1. CORRECCIÓN DE TIEMPOS (Race Condition Fix)
+        // Nos aseguramos de conectarnos al sistema si llegamos tarde
+        if (InventorySystem.Instance != null)
         {
-            layout.spacing = spacing; 
+            InventorySystem.Instance.onInventoryChangedCallback -= OnUpdateInventory;
+            InventorySystem.Instance.onInventoryChangedCallback += OnUpdateInventory;
         }
-        
-        // Buscar el texto de instrucciones en el Image/Canvas
-        instructionText = GetComponentInChildren<TextMeshProUGUI>();
-        
-        // Actualizamos al inicio para que si está vacío, se oculte la barra negra
+
+        // 2. Pintar lo que haya (Borré la línea 'InitializeUI();' porque sobraba)
+        OnUpdateInventory();
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (_myCanvas != null && _myCanvas.renderMode == RenderMode.ScreenSpaceCamera)
+        {
+            _myCanvas.worldCamera = Camera.main;
+        }
         OnUpdateInventory();
     }
 
     public void OnUpdateInventory()
     {
-        // 1. Limpiamos los iconos viejos
-        foreach (Transform child in transform)
+        // SEGURIDAD: Si no asignaste el contenedor, no hagas nada (evita errores rojos)
+        if (container == null) return;
+
+        // 1. Limpieza: Borrar SOLO lo que esté DENTRO del contenedor
+        foreach (Transform child in container)
         {
-            // No destruir el texto de instrucciones
-            if (child.GetComponent<TextMeshProUGUI>() == null)
-            {
-                Destroy(child.gameObject);
-            }
+            Destroy(child.gameObject);
         }
 
-        // 2. Controlar si se ve la barra negra de fondo
-        // Si hay 0 items, apagamos la imagen de fondo. Si hay items, la encendemos.
-        Image fondo = GetComponent<Image>();
-        if (fondo != null)
-        {
-            fondo.enabled = (InventorySystem.Instance.Inventory.Count > 0);
-        }
+        if (InventorySystem.Instance == null) return;
 
-        // 3. Dibujamos los nuevos
-        DrawInventory();
-    }
-
-    public void DrawInventory()
-    {
-        int index = 1;
+        // 2. Dibujar los nuevos
         foreach (InventoryItem item in InventorySystem.Instance.Inventory)
         {
-            AddInventorySlot(item, index);
-            index++;
+            AddInventorySlot(item);
         }
     }
 
-    public void AddInventorySlot(InventoryItem item, int index)
+    public void AddInventorySlot(InventoryItem item)
     {
-        GameObject obj = Instantiate(itemSlotPrefab);
-        obj.transform.SetParent(transform, false);
+        // A. Crear el slot DENTRO del contenedor
+        GameObject obj = Instantiate(itemSlotPrefab, container);
 
-        // --- AQUÍ ESTÁ EL TRUCO PARA EL TAMAÑO (TU CÓDIGO ORIGINAL) ---
+        // B. Resetear escala y posición local para que no salga gigante ni lejos
+        obj.transform.localScale = Vector3.one;
+        obj.transform.localPosition = Vector3.zero;
+
+        // C. Configurar tamaño
         RectTransform rt = obj.GetComponent<RectTransform>();
-        if (rt != null)
-        {
-            rt.sizeDelta = itemSize; 
-        }
+        if (rt != null) rt.sizeDelta = itemSize;
 
         LayoutElement le = obj.GetComponent<LayoutElement>();
         if (le == null) le = obj.AddComponent<LayoutElement>();
-        
+
         le.preferredWidth = itemSize.x;
         le.preferredHeight = itemSize.y;
         le.minWidth = itemSize.x;
         le.minHeight = itemSize.y;
 
-        // Configuramos los datos del item
+        // D. Rellenar datos
         ItemSlot slot = obj.GetComponent<ItemSlot>();
-        slot.Set(item);
-        
-        // Crear un fondo para el número en la esquina superior derecha
-        GameObject numberBgGO = new GameObject("NumberBg");
-        numberBgGO.transform.SetParent(obj.transform, false);
-        
-        RectTransform numberBgRt = numberBgGO.AddComponent<RectTransform>();
-        numberBgRt.anchorMin = Vector2.one;
-        numberBgRt.anchorMax = Vector2.one;
-        numberBgRt.pivot = Vector2.one;
-        numberBgRt.sizeDelta = new Vector2(45, 45);
-        numberBgRt.anchoredPosition = new Vector2(-5, -5);
-        
-        // Agregar imagen de fondo circular
-        Image bgImage = numberBgGO.AddComponent<Image>();
-        bgImage.color = new Color(1f, 0.2f, 0.2f, 0.95f); // Rojo vibrante
-        
-        // Agregar layout group
-        LayoutElement bgLayout = numberBgGO.AddComponent<LayoutElement>();
-        bgLayout.preferredWidth = 45;
-        bgLayout.preferredHeight = 45;
-        
-        // Crear el texto del número
-        GameObject numberTextGO = new GameObject("NumberText");
-        numberTextGO.transform.SetParent(numberBgGO.transform, false);
-        
-        TextMeshProUGUI numberText = numberTextGO.AddComponent<TextMeshProUGUI>();
-        numberText.text = index.ToString();
-        numberText.alignment = TextAlignmentOptions.Center;
-        numberText.fontSize = 32;
-        numberText.fontStyle = FontStyles.Bold;
-        numberText.color = Color.white;
-        
-        // Agregar outline al texto
-        var outline = numberTextGO.AddComponent<Outline>();
-        outline.effectColor = new Color(0.2f, 0.2f, 0.2f, 1f); // Gris oscuro
-        outline.effectDistance = new Vector2(1, -1);
-        
-        RectTransform numberTextRt = numberTextGO.GetComponent<RectTransform>();
-        numberTextRt.anchorMin = Vector2.zero;
-        numberTextRt.anchorMax = Vector2.one;
-        numberTextRt.offsetMin = Vector2.zero;
-        numberTextRt.offsetMax = Vector2.zero;
+        if (slot != null)
+        {
+            slot.Set(item);
+        }
     }
 }
